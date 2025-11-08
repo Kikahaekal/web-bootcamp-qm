@@ -232,7 +232,7 @@ input:checked + .slider:hover {
     align-items: center;
     background: var(--dark-background);
     color: var(--light-text);
-    height: 600px; 
+    height: 700px; 
     padding-top: var(--navbar-height); 
     padding-bottom: 0;
     padding-left: 0; 
@@ -248,6 +248,7 @@ input:checked + .slider:hover {
     margin: 0 auto; 
     padding: 0 5%; 
     margin-bottom: 4rem;
+    padding-top: 80px;
 }
 .hero-text {
     flex-grow: 1;
@@ -285,7 +286,7 @@ input:checked + .slider:hover {
 }
 .hero-img img {
     width: 100%; 
-    height: 100%; 
+    height: 95%px; 
     object-fit: cover; 
     object-position: center center; 
     display: block;
@@ -647,111 +648,6 @@ input:checked + .slider:hover {
 
 
 /* --- 11. Footer --- */
-.footer-new {
-    background: var(--dark-background);
-    color: var(--light-text);
-    padding: 4rem 5% 2rem;
-    font-family: var(--body-font);
-}
-.footer-new-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap; 
-    gap: 3rem; 
-    margin-bottom: 3rem;
-}
-.footer-new-left {
-    flex: 2; 
-    min-width: 300px;
-}
-.footer-new-left h2 {
-    font-family: var(--heading-font);
-    color: var(--primary-color);
-    font-size: 2.8rem; 
-    line-height: 1.2;
-    margin-bottom: 1.5rem;
-    font-weight: 700;
-}
-.footer-new-left p {
-    font-family: var(--body-font); /* Questrial */
-    font-size: 1.1rem; 
-    color: var(--light-text);
-    margin-bottom: 2rem;
-    max-width: 400px; 
-}
-.footer-new-icons {
-    display: flex;
-    gap: 1.5rem;
-}
-.footer-new-icons a {
-    color: var(--light-text);
-    font-size: 1.5rem;
-    text-decoration: none;
-    transition: color .3s;
-}
-.footer-new-icons a:hover {
-    color: var(--primary-color);
-}
-.footer-new-right {
-    flex: 1;
-    min-width: 200px;
-    padding-top: 0.5rem; 
-}
-.footer-new-right ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-}
-.footer-new-right li {
-    margin-bottom: 0; 
-}
-.footer-new-right a {
-    font-family: var(--body-font); /* Questrial */
-    color: var(--light-text);
-    text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: 500;
-    transition: color .3s;
-}
-.footer-new-right a:hover {
-    color: var(--primary-color);
-}
-.footer-new-divider {
-    border: 0;
-    height: 1px;
-    background-color: var(--primary-color); 
-    opacity: 0.5;
-    margin-bottom: 1.5rem;
-}
-.footer-new-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap; 
-    gap: 1rem;
-    font-size: 0.9rem;
-    color: #aaa; 
-}
-.footer-new-bottom-logo {
-    font-family: var(--heading-font);
-    color: var(--primary-color);
-    font-weight: 700;
-    font-size: 1rem;
-}
-.footer-new-bottom-copyright {
-    color: var(--light-text);
-    font-size: 0.9rem;
-    font-family: var(--body-font); /* Questrial */
-}
-.footer-new-bottom-copyright span {
-    color: inherit;
-    font-family: inherit;
-    font-weight: normal;
-}
 
 /* --- 12. Animations & Helpers --- */
 .hidden {
@@ -962,4 +858,101 @@ TAMBAHAN UNTUK "ABOUT US" STYLE (dari style.css)
     font-family: var(--body-font); /* Questrial */
     font-size: 1.1rem;
     line-height: 1.8;
+}
+
+footer {
+    background: #000;
+    color: white;
+    padding: 2rem 5% 1rem;
+    width: 702;
+    height: 486.4;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #333;
+}
+
+.footer-brand h2 {
+    font-size: 36px;
+    color: #C09C68;
+    margin-bottom: 15px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.footer-brand p {
+    color: #C09C68;
+    margin-bottom: 25px;
+    font-size: 15px;
+    font-family: 'Questrial', sans-serif;
+}
+
+.social-links {
+    display: flex;
+    gap: 20px;
+}
+
+.social-links a {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(212, 175, 55, 0.1);
+    border: 2px solid #C09C68;
+    border-radius: 50%;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+.social-links a svg {
+    width: 20px;
+    height: 20px;
+    color: #C09C68;
+    transition: all 0.3s;
+}
+
+.social-links a:hover {
+    background: #C09C68;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+}
+
+.social-links a:hover svg {
+    color: #000;
+    transform: scale(1.1);
+}
+
+.footer-nav {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.footer-nav a {
+    color: #C09C68;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
+    font-family: 'Questrial', sans-serif;
+}
+
+.footer-nav a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.footer-bottom p {
+    color: #C09C68;
+    font-size: 14px;
+    font-family: 'Questrial', sans-serif;
 }
