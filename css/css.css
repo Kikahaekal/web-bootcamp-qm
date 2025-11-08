@@ -120,8 +120,8 @@ header {
 }
 
 .logo img {
-  width: 50px; /* silakan sesuaikan ukuran */
-  height: auto; /* biar proporsi gambar tetap bagus */
+  width: 50px;
+  height: auto;
   object-fit: contain;
 }
 

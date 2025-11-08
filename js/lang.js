@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const initLanguage = () => {
                     const savedLang = localStorage.getItem("language");
                     const browserLang = navigator.language.split('-')[0];
-                    let currentLang = savedLang || (browserLang === 'id' ? 'id' : 'en');
+                    let currentLang = savedLang || 'en';
                     setLanguage(currentLang, true);
                 };
 
