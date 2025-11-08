@@ -127,18 +127,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     localStorage.setItem("language", lang);
                     document.documentElement.lang = lang;
-                    toggle.checked = lang === "en";
+                    
+                    toggle.checked = lang === "id";
                 };
 
                 const initLanguage = () => {
                     const savedLang = localStorage.getItem("language");
-                    const browserLang = navigator.language.split('-')[0];
                     let currentLang = savedLang || 'en';
                     setLanguage(currentLang, true);
                 };
-
                 toggle.addEventListener("change", () => {
-                    const newLang = toggle.checked ? "en" : "id";
+                    const newLang = toggle.checked ? "id" : "en";
                     setLanguage(newLang);
                 });
 
