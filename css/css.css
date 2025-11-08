@@ -275,7 +275,7 @@ input:checked + .slider:hover {
 .hero-img {
     position: absolute;
     width: 633px;
-    height: 681px;
+    height: auto;
     left: 0px;
     top: 77px;
     width: 45%; 
