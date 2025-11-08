@@ -1,0 +1,965 @@
+/*
+========================================
+DAFTAR ISI
+========================================
+1.  :root (Variabel Global)
+2.  Global Resets & Base Styles
+3.  Utility Classes & Global Components
+4.  Page Transition
+5.  Header & Navigation
+6.  Section: Hero (*** TELAH DIMODIFIKASI ***)
+7.  Section: About
+8.  Section: Vision & Mission
+9.  Section: Product (*** SLIDER BARU - FIX PANAH & DESKRIPSI ***)
+10. Section: FAQ (*** MENGGANTIKAN KONTAK ***)
+11. Footer
+12. Animations & Helpers
+13. Media Queries (Responsive)
+========================================
+*/
+
+/* --- 1. :root (Variabel Global) --- */
+:root {
+    --primary-color: #B98C55;
+    --secondary-color: #c79d6f;
+    --background-color: #FFFFFF;
+    --text-color: #4A4A4A;
+    --dark-background: #111;
+    --light-text: #FFF;
+    --heading-font: 'Rozha One', serif;    /* Rozha One untuk Judul/Display */
+    --body-font: 'Questrial', sans-serif;  /* Questrial untuk Teks Badan, Link, & Tombol */
+    --navbar-height: 80px;
+}
+
+/* --- 2. Global Resets & Base Styles --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+body {
+    font-family: var(--body-font);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+h1, h2, h3 {
+    font-family: var(--heading-font);
+    color: var(--primary-color);
+    font-weight: 700;
+}
+section {
+    padding: 1rem 5%;
+}
+
+/* --- 3. Utility Classes & Global Components --- */
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+.btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    padding: .8rem 1.8rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color .3s ease, transform .3s ease;
+    font-family: var(--body-font); /* Menjamin Questrial */
+}
+.btn:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-3px);
+}
+.btn-small {
+    padding: .6rem 1.2rem;
+    font-size: .9rem;
+}
+
+/* --- 4. Page Transition --- */
+#page-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--background-color);
+    z-index: 2000;
+    opacity: 1;
+    pointer-events: none;
+    transition: opacity .25s cubic-bezier(.7, 0, .3, 1);
+}
+#page-transition-overlay.hidden {
+    opacity: 0;
+}
+
+/* --- 5. Header & Navigation --- */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 80px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  color: #c09c68;
+}
+
+.logo img {
+  width: 50px; /* silakan sesuaikan ukuran */
+  height: auto; /* biar proporsi gambar tetap bagus */
+  object-fit: contain;
+}
+
+nav {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+nav a {
+    color: #C09C68;
+    text-decoration: none;
+    font-size: 16px;
+    transition: all 0.3s;
+    position: relative;
+    font-family: 'Questrial', sans-serif;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #C09C68;
+    transition: width 0.3s;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* Language Toggle */
+.language-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 20px;
+}
+
+.lang-label {
+    color: #C09C68;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Questrial', sans-serif;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #C09C68;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider:hover {
+    background-color: #999;
+}
+
+input:checked + .slider:hover {
+    background-color: #C09C68;
+}
+
+
+
+/* --- 6. Section: Hero --- */
+.hero {
+    position: relative; 
+    display: flex; 
+    align-items: center;
+    background: var(--dark-background);
+    color: var(--light-text);
+    height: 600px; 
+    padding-top: var(--navbar-height); 
+    padding-bottom: 0;
+    padding-left: 0; 
+    padding-right: 0;
+    overflow: hidden; 
+}
+.hero-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1300px; 
+    height: 100%; 
+    margin: 0 auto; 
+    padding: 0 5%; 
+    margin-bottom: 4rem;
+}
+.hero-text {
+    flex-grow: 1;
+    min-width: 300px;
+    max-width: 55%; 
+    padding-left: 2rem; 
+    margin-left: auto; 
+    position: relative;
+    z-index: 2;
+}
+.hero-text h2 {
+    font-size: 4rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: #C09C68;
+}
+.hero-text p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    max-width: 500px;
+    color: var(--light-text);
+    font-family: var(--body-font); /* Menjamin Questrial */
+}
+.hero-img {
+    position: absolute;
+    width: 633px;
+    height: 681px;
+    left: 0px;
+    top: 77px;
+    width: 45%; 
+    height: 550px; 
+    border-radius: 20px 0 0 20px; 
+    overflow: hidden;
+    z-index: 1; 
+}
+.hero-img img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    object-position: center center; 
+    display: block;
+}
+
+/* --- 7. Section: About --- */
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* --- 8. Section: Vision & Mission --- */
+.vision-mission {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+.vision,
+.mission {
+    flex: 1 1 45%;
+    min-width: 300px;
+    text-align: center;
+    background: #fff;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .05);
+}
+.vision-mission img {
+    height: 100px;
+    margin-bottom: 1rem;
+}
+.vision-mission h3 {
+    font-size: 1.5rem;
+    margin-bottom: .5rem;
+}
+
+/* =================================================
+▼▼▼ 9. Section: Product (MODIFIKASI SLIDER) ▼▼▼
+=================================================
+*/
+
+/* Kontainer Utama Bagian */
+.mushroom-section {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    overflow: hidden; 
+}
+
+/* Judul Utama: "Our Mushrooms" */
+.mushroom-section h2 {
+    font-family: var(--heading-font); 
+    color: var(--primary-color); 
+    font-size: 3.5rem;
+    font-weight: 500;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+/* --- BAGIAN SLIDER BARU --- */
+
+/* Kontainer yang membungkus viewport dan tombol */
+.slider-container {
+    position: relative;
+    width: 90%; 
+    max-width: 800px; 
+    margin: 0 auto;
+}
+
+/* Viewport (Area yang terlihat) */
+.slider-viewport {
+    width: 100%;
+    overflow: hidden; 
+}
+
+
+/* Track (Pembungkus semua slide yang bergerak) */
+.slider-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Tombol Panah (Kiri & Kanan) */
+.slider-btn {
+    position: absolute;
+    top: 200px; 
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.7); 
+    border: 1px solid var(--primary-color); 
+    color: var(--primary-color); 
+    border-radius: 50%; 
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0; 
+    transition: background-color 0.3s, color 0.3s, opacity 0.3s ease-in-out;
+}
+
+.slider-btn:hover {
+    background-color: var(--primary-color); 
+    color: var(--light-text); 
+}
+
+.slider-container:hover .slider-btn {
+    opacity: 1;
+}
+
+#prevBtn {
+    left: -60px; 
+}
+
+#nextBtn {
+    right: -60px; 
+}
+
+
+/* --- PERUBAHAN PADA KARTU --- */
+
+/* Kartu Produk Tunggal (Slide) */
+.mushroom-card {
+    flex-shrink: 0; 
+    flex-basis: 70%; 
+    margin: 0 15px; 
+    padding: 0 20px; 
+    box-sizing: border-box; 
+    text-align: center;
+}
+
+/* Gambar Jamur (Beri batas agar tidak terlalu besar) */
+.mushroom-card img {
+    max-width: 100%;
+    max-height: 400px; 
+    height: auto;
+    object-fit: contain; 
+    margin-bottom: 25px;
+}
+
+/* Judul Produk: "Fresh Oyster Mushrooms" */
+.mushroom-card h3 {
+    font-family: var(--heading-font); 
+    color: var(--secondary-color); 
+    font-size: 1.8rem; 
+    font-weight: 500;
+    margin: 0 0 15px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+/* Deskripsi Produk (Sembunyi by default) */
+.mushroom-card p {
+    font-family: var(--body-font); /* Questrial */
+    color: var(--text-color); 
+    font-size: 1rem;
+    line-height: 1.5;
+    max-width: 90%;
+    margin: 0 auto 25px auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+/* Tampilkan HANYA h3 dan p TERAKHIR di slide aktif */
+.mushroom-card.is-active h3:last-of-type,
+.mushroom-card.is-active p:last-of-type {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition-delay: 0.2s; 
+}
+
+/* Tombol "View More" (Di luar slider) */
+.btn-view-more {
+    display: inline-block;
+    background-color: var(--primary-color); 
+    color: var(--light-text); 
+    font-family: var(--body-font); /* Menjamin Questrial */
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-decoration: none;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 30px; 
+}
+
+.btn-view-more:hover {
+    background-color: var(--secondary-color); 
+}
+
+
+/* =================================================
+▼▼▼ 10. Section: FAQ (MENGGANTIKAN KONTAK LAMA) ▼▼▼
+================================================= */
+
+/* Variabel lokal HANYA untuk section #contact (FAQ) */
+#contact {
+    --color-primary: #A8875F; 
+    --color-secondary: var(--background-color);
+    --color-text-light: #FFFFFF; 
+    --color-title: #8C7153; 
+    --color-border: #E8DBC9; 
+    --font-title: 'Rozha One', serif;  /* Rozha One */
+    --font-body: 'Questrial', sans-serif; /* Questrial */
+}
+
+/* Style global HANYA untuk section #contact (FAQ) */
+#contact {
+    font-family: var(--font-body);
+    background-color: var(--color-secondary);
+    padding-bottom: 8rem;
+    color: #594A32; 
+}
+
+#contact .faq-container {
+    width: 100%;
+    max-width: 800px;
+    padding: 50px 30px; /* Padding internal container */
+    margin: 0 auto; /* Pusatkan container di dalam section */
+    border-radius: 20px; 
+    background-color: var(--color-secondary);
+    position: relative;
+    box-shadow: 0 0 0 5px var(--color-border); /* Border dari CSS FAQ baru */
+}
+
+/* Header */
+#contact h1 {
+    text-align: center;
+    font-family: var(--font-title);
+    font-size: 3.5em; 
+    font-weight: 700;
+    color: var(--color-title);
+    margin-bottom: 50px;
+    letter-spacing: 5px; 
+    text-transform: uppercase;
+}
+
+/* FAQ Item Styling */
+#contact .faq-item {
+    margin-bottom: 25px; 
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); 
+}
+
+#contact .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 18px 25px; 
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: var(--font-body); /* Questrial */
+    font-size: 1.15em; 
+    font-weight: 600; 
+    transition: background-color 0.3s, border-radius 0.3s;
+    border-radius: 10px; 
+}
+
+#contact .faq-question:hover {
+    background-color: #947b59; 
+}
+
+/* Styling Icon (Panah) */
+#contact .faq-question .icon {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+}
+
+#contact .faq-question .icon svg {
+    fill: var(--color-text-light);
+    height: 24px;
+    width: 24px;
+    transition: transform 0.3s;
+}
+
+/* Rotation for the icon: Panah ke bawah saat tertutup */
+#contact .faq-question .icon svg {
+    transform: rotate(0deg); 
+}
+
+/* Rotation for the icon: Panah ke atas saat terbuka */
+#contact .faq-question.active .icon svg {
+    transform: rotate(180deg); 
+}
+
+/* FAQ Answer Styling */
+#contact .faq-answer {
+    background-color: var(--color-primary); 
+    color: var(--color-text-light); 
+    padding: 0 25px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+}
+
+#contact .faq-answer.open {
+    max-height: 300px; 
+    padding: 20px 25px;
+    background-color: var(--color-primary); 
+}
+
+#contact .faq-answer p {
+    margin: 0;
+    line-height: 1.6;
+    color: var(--color-text-light); 
+    font-size: 1em;
+    font-family: var(--font-body); /* Questrial */
+}
+
+/* Styling saat jawaban terbuka: Mengubah radius pertanyaan */
+#contact .faq-question.active {
+    border-radius: 10px 10px 0 0;
+    box-shadow: none; 
+}
+
+#contact .faq-answer.open {
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); 
+}
+
+/* Responsiveness (Khusus untuk FAQ, di dalam @media global jika ada) */
+@media (max-width: 650px) {
+    #contact .faq-container {
+        padding: 30px 15px;
+    }
+
+    #contact h1 {
+        font-size: 2.5em;
+        margin-bottom: 30px;
+    }
+
+    #contact .faq-question {
+        font-size: 1em;
+        padding: 15px;
+    }
+
+    #contact .faq-answer.open {
+        padding: 15px;
+    }
+}
+/* =================================================
+▲▲▲ AKHIR BAGIAN FAQ ▲▲▲
+================================================= */
+
+
+/* --- 11. Footer --- */
+.footer-new {
+    background: var(--dark-background);
+    color: var(--light-text);
+    padding: 4rem 5% 2rem;
+    font-family: var(--body-font);
+}
+.footer-new-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap; 
+    gap: 3rem; 
+    margin-bottom: 3rem;
+}
+.footer-new-left {
+    flex: 2; 
+    min-width: 300px;
+}
+.footer-new-left h2 {
+    font-family: var(--heading-font);
+    color: var(--primary-color);
+    font-size: 2.8rem; 
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+.footer-new-left p {
+    font-family: var(--body-font); /* Questrial */
+    font-size: 1.1rem; 
+    color: var(--light-text);
+    margin-bottom: 2rem;
+    max-width: 400px; 
+}
+.footer-new-icons {
+    display: flex;
+    gap: 1.5rem;
+}
+.footer-new-icons a {
+    color: var(--light-text);
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: color .3s;
+}
+.footer-new-icons a:hover {
+    color: var(--primary-color);
+}
+.footer-new-right {
+    flex: 1;
+    min-width: 200px;
+    padding-top: 0.5rem; 
+}
+.footer-new-right ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+.footer-new-right li {
+    margin-bottom: 0; 
+}
+.footer-new-right a {
+    font-family: var(--body-font); /* Questrial */
+    color: var(--light-text);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: color .3s;
+}
+.footer-new-right a:hover {
+    color: var(--primary-color);
+}
+.footer-new-divider {
+    border: 0;
+    height: 1px;
+    background-color: var(--primary-color); 
+    opacity: 0.5;
+    margin-bottom: 1.5rem;
+}
+.footer-new-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; 
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: #aaa; 
+}
+.footer-new-bottom-logo {
+    font-family: var(--heading-font);
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1rem;
+}
+.footer-new-bottom-copyright {
+    color: var(--light-text);
+    font-size: 0.9rem;
+    font-family: var(--body-font); /* Questrial */
+}
+.footer-new-bottom-copyright span {
+    color: inherit;
+    font-family: inherit;
+    font-weight: normal;
+}
+
+/* --- 12. Animations & Helpers --- */
+.hidden {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity .6s ease-out, transform .6s ease-out;
+}
+.show-anim {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- 13. Media Queries (Responsive) --- */
+@media (max-width: 992px) {
+    /* ... (Kode responsive disingkat) ... */
+}
+@media (max-width: 768px) {
+    /* ... (Kode responsive disingkat) ... */
+}
+
+/*
+========================================
+TAMBAHAN UNTUK "ABOUT US" STYLE (dari style.css)
+========================================
+*/
+
+.white-container-section {
+    background-color: #ffffff; 
+    padding: 3rem 5%; 
+}
+.about-style-wrapper,
+.vision-mission-style-wrapper,
+.why-choose-us-style-wrapper,
+.partners-style-wrapper {
+    font-family: var(--body-font); /* Questrial */
+    color: #555;
+    line-height: 1.6;
+    font-size: 15px;
+    padding: 0;
+}
+.container-alt {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px; 
+    text-align: center;
+}
+.section-title-alt {
+    font-family: var(--heading-font); /* Rozha One */
+    color: #B08D57; 
+    font-weight: 500;
+    font-size: 2.5rem;
+    margin-top: 30px; 
+    margin-bottom: 20px;
+    text-align: center;
+}
+.container-alt p {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    font-family: var(--body-font); /* Questrial */
+    color: #555;
+}
+.divider-alt {
+    border: 0;
+    height: 1px;
+    background-color: var(--primary-color); 
+    opacity: 0.5; 
+    margin: 25px auto; 
+    width: 80%;
+}
+.vision-mission-alt {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    gap: 40px; 
+    margin-top: 0; 
+}
+.vision-alt, .mission-alt {
+    flex-basis: 48%; 
+}
+.vision-mission-alt p {
+    max-width: 100%; 
+}
+.why-choose-us-style-wrapper .section-title-alt {
+    margin-top: 0; 
+}
+.features-grid-alt {
+    display: flex;
+    justify-content: space-around; 
+    align-items: flex-start;
+    margin-top: 40px;
+}
+.feature-item-alt {
+    flex-basis: 18%; 
+}
+.feature-item-alt i {
+    font-size: 2.5rem; 
+    color: #B08D57; 
+    margin-bottom: 15px;
+}
+.feature-item-alt h3 {
+    font-family: var(--body-font); /* Questrial */
+    font-size: 1rem;
+    color: #555;
+    font-weight: 700;
+    text-align: center;
+}
+@media (max-width: 768px) {
+    /* ... (Kode responsive disingkat) ... */
+}
+.partners-style-wrapper p {
+    max-width: 100%; 
+}
+.mutual-benefit-alt {
+    font-weight: 700; 
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-family: var(--body-font); /* Questrial */
+    color: #555; 
+    font-size: 15px;
+}
+.cta-button-alt {
+    background-color: #B98C55; 
+    color: #ffffff; 
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 700;
+    display: inline-block;
+    transition: background-color 0.3s;
+    font-family: var(--body-font); /* Questrial */
+    font-size: 15px;
+}
+.cta-button-alt:hover {
+    background-color: #c79d6f; 
+}
+
+/*
+=================================================
+▼▼▼ [MODIFIKASI] PENYESUAIAN BAGIAN PARTNERS  ▼▼▼
+=================================================
+*/
+.partners-style-wrapper .container-alt {
+    text-align: left; 
+}
+.partners-style-wrapper .section-title-alt {
+    font-family: var(--heading-font); /* Rozha One */
+    color: #B08D57;                   
+    font-weight: 500;
+    font-size: 3.5rem;                
+    text-transform: capitalize;       
+    text-align: left;                 
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+.partners-style-wrapper .container-alt p {
+    font-family: var(--body-font); /* Questrial */
+    color: #555;                      
+    font-size: 15px;                  
+    line-height: 1.6;
+    margin-left: 0;                
+    margin-right: 0;
+    max-width: 700px;                 
+}
+.partners-style-wrapper .mutual-benefit-alt {
+    font-family: var(--heading-font); /* Rozha One (untuk penekanan) */ 
+    font-style: italic;               
+    color: #B08D57;                   
+    font-weight: 500;                 
+    font-size: 1.3rem;                
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;              
+}
+.partners-style-wrapper .cta-button-alt {
+    font-family: var(--body-font);  /* Questrial */
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--light-text);      
+    background-color: var(--primary-color);
+    padding: 12px 25px;
+    border-radius: 8px;               
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+/* ================================================= */
+/* ▼▼▼ MODIFIKASI KHUSUS ABOUT US & VISI MISI ▼▼▼ */
+/* ================================================= */
+#about-section .section-title-alt {
+    font-family: 'Rozha One', serif;
+    margin-top: 0; 
+    margin-bottom: 10px; 
+}
+.vision-mission-style-wrapper .section-title-alt {
+    font-family: 'Rozha One', serif;
+    margin-top: 0; 
+    margin-bottom: 10px; 
+}
+#about-section .container-alt p {
+    font-family: var(--body-font); /* Questrial */
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+.vision-mission-style-wrapper .vision-alt p,
+.vision-mission-style-wrapper .mission-alt p {
+    font-family: var(--body-font); /* Questrial */
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
